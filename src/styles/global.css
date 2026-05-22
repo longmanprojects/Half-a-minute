@@ -114,7 +114,6 @@ input {
     height: 100dvh;
     border-radius: 0;
     box-shadow: none;
-    overflow-y: auto;
   }
 
   /* Hide desktop mockup decorations */

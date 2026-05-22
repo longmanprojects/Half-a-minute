@@ -4,22 +4,17 @@
   overflow: hidden;
 }
 
-/* ── Mobile: let the whole screen scroll, enlarge everything ── */
+/* ── Mobile: fixed header/footer, team-list scrolls, player section scrolls within card ── */
 @media (max-width: 500px) {
-  /* phone-shell handles scroll — setup-screen grows to content height */
-  .setup-screen {
-    height: auto;
-    min-height: 100dvh;
-    overflow: visible;
-  }
+  /* Keep setup-screen as a fixed-height flex column (inherited from .screen) */
 
-  /* Team list fills remaining space when short; grows freely when tall */
+  /* Team list fills middle, scrolls if cards overflow */
   .team-list {
     flex: 1;
-    min-height: unset;
-    overflow: visible;
+    min-height: 0;
+    overflow-y: auto;
     gap: 12px;
-    padding: 20px 0;
+    padding: 16px 0;
   }
 
   /* Bigger team row touch target */
@@ -62,10 +57,12 @@
     font-size: 18px;
   }
 
-  /* Player section more breathing room */
+  /* Player section: scrolls internally — shows ~3 players, then scrolls for more */
   .player-section {
     padding: 10px 18px 16px;
     gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
   }
 
   .player-row {
