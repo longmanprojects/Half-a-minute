@@ -3,29 +3,28 @@
   <!-- Background -->
   <rect width="512" height="512" rx="112" fill="#1A1F3A"/>
 
-  <!-- Yellow "31" -->
+  <!-- Yellow "31" — centered as a group with SECONDS -->
   <text
     x="256"
-    y="295"
+    y="218"
     text-anchor="middle"
     dominant-baseline="middle"
     font-family="Arial Black, sans-serif"
     font-weight="900"
-    font-size="272"
-    letter-spacing="-12"
+    font-size="200"
     fill="#F5E06E"
   >31</text>
 
-  <!-- Blue "SECONDS" -->
+  <!-- Blue "SECONDS" — sits cleanly below with even gap -->
   <text
     x="256"
-    y="408"
+    y="358"
     text-anchor="middle"
     dominant-baseline="middle"
     font-family="Arial, sans-serif"
     font-weight="700"
-    font-size="58"
-    letter-spacing="10"
+    font-size="52"
+    letter-spacing="7"
     fill="#7BB8D4"
   >SECONDS</text>
 </svg>
