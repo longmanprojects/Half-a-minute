@@ -21,9 +21,24 @@ export const TEAM_COLORS = [
   '#6D4C41', // brown
 ]
 
+export const COLOR_NAMES = {
+  '#E53935': 'Red',
+  '#8E24AA': 'Purple',
+  '#43A047': 'Green',
+  '#FB8C00': 'Orange',
+  '#00897B': 'Teal',
+  '#E91E8C': 'Pink',
+  '#1E88E5': 'Blue',
+  '#6D4C41': 'Brown',
+}
+
+export function colorTeamName(color) {
+  return `${COLOR_NAMES[color] ?? 'Team'} Team`
+}
+
 const DEFAULT_TEAMS = [
-  { id: 1, name: 'Team 1', color: TEAM_COLORS[0], score: 0, players: [] },
-  { id: 2, name: 'Team 2', color: TEAM_COLORS[1], score: 0, players: [] },
+  { id: 1, name: colorTeamName(TEAM_COLORS[0]), color: TEAM_COLORS[0], score: 0, players: [], customName: false },
+  { id: 2, name: colorTeamName(TEAM_COLORS[1]), color: TEAM_COLORS[1], score: 0, players: [], customName: false },
 ]
 
 function App() {

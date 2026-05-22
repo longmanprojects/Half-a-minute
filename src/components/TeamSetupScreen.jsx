@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './TeamSetupScreen.css'
 import HomeButton from './HomeButton.jsx'
+import { colorTeamName } from '../App.jsx'
 
 export default function TeamSetupScreen({ initialTeams, teamColors, onNext, onHome }) {
   function withMinPlayers(players) {
@@ -21,9 +22,10 @@ export default function TeamSetupScreen({ initialTeams, teamColors, onNext, onHo
     const id = Date.now()
     setTeams([...teams, {
       id,
-      name: `Team ${teams.length + 1}`,
+      name: colorTeamName(nextColor),
       color: nextColor,
       score: 0,
+      customName: false,
       players: [{ id: id + 1, name: '' }, { id: id + 2, name: '' }],
     }])
   }
@@ -66,7 +68,10 @@ export default function TeamSetupScreen({ initialTeams, teamColors, onNext, onHo
   }
 
   function commitEdit(id) {
-    setTeams(teams.map(t => t.id === id ? { ...t, name: editingName.trim() || t.name } : t))
+    const team = teams.find(t => t.id === id)
+    const newName = editingName.trim() || team.name
+    const isCustom = newName !== colorTeamName(team.color)
+    setTeams(teams.map(t => t.id === id ? { ...t, name: newName, customName: isCustom } : t))
     setEditingId(null)
   }
 
@@ -76,7 +81,11 @@ export default function TeamSetupScreen({ initialTeams, teamColors, onNext, onHo
   }
 
   function pickColor(id, color) {
-    setTeams(teams.map(t => t.id === id ? { ...t, color } : t))
+    setTeams(teams.map(t =>
+      t.id === id
+        ? { ...t, color, name: t.customName ? t.name : colorTeamName(color) }
+        : t
+    ))
     setColorPickerId(null)
   }
 
