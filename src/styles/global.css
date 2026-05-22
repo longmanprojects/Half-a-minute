@@ -134,18 +134,23 @@ input {
   .who-starts-screen,
   .target-screen {
     padding-top: calc(env(safe-area-inset-top, 44px) + 56px);
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+    padding-bottom: env(safe-area-inset-bottom, 8px);
   }
 
   /* Splash screen has no home button */
   .splash-screen {
     padding-top: calc(env(safe-area-inset-top, 44px) + 32px);
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+    padding-bottom: env(safe-area-inset-bottom, 8px);
   }
 
   /* Home screen: push bottom buttons above home indicator */
   .home-screen {
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+    padding-bottom: env(safe-area-inset-bottom, 8px);
+  }
+
+  /* Gameplay: protect END TURN bar from home indicator */
+  .gameplay-screen {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   /* Timer strip: home button lives here at the top */
