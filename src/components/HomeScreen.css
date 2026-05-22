@@ -48,13 +48,6 @@
   line-height: 1.5;
 }
 
-.home-pieces {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  margin-top: 28px;
-}
-
 .home-actions {
   display: flex;
   flex-direction: column;
