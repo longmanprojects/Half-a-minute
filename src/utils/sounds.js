@@ -29,46 +29,46 @@ export function playClick() {
   } catch (_) {}
 }
 
-// Timer tick — character changes with phase
+// Timer tick — filtered noise burst, like a real clock mechanism
 export function playTick(phase = 'calm') {
   try {
     const ac = getCtx()
     const now = ac.currentTime
 
+    // Each phase: slightly sharper filter + louder as urgency builds
     const configs = {
-      calm:     { freq: 440, vol: 0.10, dur: 0.055, type: 'sine'     },
-      amber:    { freq: 560, vol: 0.20, dur: 0.050, type: 'triangle' },
-      critical: { freq: 740, vol: 0.32, dur: 0.045, type: 'square'   },
+      calm:     { filterFreq: 2200, Q: 1.0, vol: 0.18, dur: 0.022 },
+      amber:    { filterFreq: 3000, Q: 0.8, vol: 0.30, dur: 0.020 },
+      critical: { filterFreq: 4000, Q: 0.7, vol: 0.45, dur: 0.018 },
     }
-    const { freq, vol, dur, type } = configs[phase] ?? configs.calm
+    const { filterFreq, Q, vol, dur } = configs[phase] ?? configs.calm
 
-    const osc = ac.createOscillator()
+    // Fill a short buffer with white noise
+    const bufferSize = Math.floor(ac.sampleRate * 0.03)
+    const buffer = ac.createBuffer(1, bufferSize, ac.sampleRate)
+    const data = buffer.getChannelData(0)
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1
+
+    const source = ac.createBufferSource()
+    source.buffer = buffer
+
+    // Bandpass filter shapes the noise into a click/tick character
+    const filter = ac.createBiquadFilter()
+    filter.type = 'bandpass'
+    filter.frequency.value = filterFreq
+    filter.Q.value = Q
+
     const gain = ac.createGain()
-    osc.connect(gain)
+    source.connect(filter)
+    filter.connect(gain)
     gain.connect(ac.destination)
 
-    osc.type = type
-    osc.frequency.setValueAtTime(freq, now)
-
+    // Very sharp attack, fast exponential decay = tick, not buzz
     gain.gain.setValueAtTime(vol, now)
     gain.gain.exponentialRampToValueAtTime(0.0001, now + dur)
 
-    osc.start(now)
-    osc.stop(now + dur)
-
-    // Critical phase: add a low sub-tone for extra urgency
-    if (phase === 'critical') {
-      const sub = ac.createOscillator()
-      const subGain = ac.createGain()
-      sub.connect(subGain)
-      subGain.connect(ac.destination)
-      sub.type = 'sine'
-      sub.frequency.setValueAtTime(freq / 2, now)
-      subGain.gain.setValueAtTime(0.12, now)
-      subGain.gain.exponentialRampToValueAtTime(0.0001, now + dur)
-      sub.start(now)
-      sub.stop(now + dur)
-    }
+    source.start(now)
+    source.stop(now + 0.04)
   } catch (_) {}
 }
 
