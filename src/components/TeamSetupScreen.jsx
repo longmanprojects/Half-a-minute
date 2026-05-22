@@ -147,8 +147,9 @@ export default function TeamSetupScreen({ initialTeams, teamColors, onNext, onHo
             )}
 
             <div className="player-section">
-              {team.players.map((player) => (
+              {team.players.map((player, idx) => (
                 <div className="player-row" key={player.id}>
+                  <span className="player-num">{idx + 1}</span>
                   <input
                     className="player-input"
                     value={player.name}

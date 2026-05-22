@@ -6,13 +6,16 @@
 
 /* ── Mobile: let the whole screen scroll, enlarge everything ── */
 @media (max-width: 500px) {
+  /* phone-shell handles scroll — setup-screen grows to content height */
   .setup-screen {
-    overflow-y: auto;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
   }
 
-  /* Team list no longer needs to scroll independently — parent does */
+  /* Team list fills remaining space when short; grows freely when tall */
   .team-list {
-    flex: none;
+    flex: 1;
     min-height: unset;
     overflow: visible;
     gap: 12px;
@@ -270,6 +273,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.player-num {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.25);
+  width: 14px;
+  text-align: right;
+  flex-shrink: 0;
 }
 
 .player-input {
