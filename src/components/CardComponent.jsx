@@ -76,10 +76,6 @@ function CardInner({ words, onFlip, timerActive, onStart, teamColor, faceColor, 
         </div>
       )}
 
-      <div className="card-footer">
-        <span className="card-footer-label">THIS CARD</span>
-        <span className="card-pts">5 CLUES</span>
-      </div>
     </div>
   )
 }
