@@ -4,6 +4,103 @@
   overflow: hidden;
 }
 
+/* ── Mobile: let the whole screen scroll, enlarge everything ── */
+@media (max-width: 500px) {
+  .setup-screen {
+    overflow-y: auto;
+  }
+
+  /* Team list no longer needs to scroll independently — parent does */
+  .team-list {
+    flex: none;
+    min-height: unset;
+    overflow: visible;
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  /* Bigger team row touch target */
+  .team-row {
+    padding: 16px 18px;
+    gap: 16px;
+  }
+
+  /* Larger colour dot */
+  .color-dot {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Bigger colour swatches in picker */
+  .color-swatch {
+    width: 42px;
+    height: 42px;
+  }
+
+  .color-picker {
+    gap: 14px;
+    padding: 16px 18px;
+  }
+
+  /* Larger team name */
+  .team-name {
+    font-size: 20px;
+  }
+
+  .team-name-input {
+    font-size: 20px;
+    padding: 8px 14px;
+  }
+
+  /* Remove button easier to tap */
+  .remove-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  /* Player section more breathing room */
+  .player-section {
+    padding: 10px 18px 16px;
+    gap: 10px;
+  }
+
+  .player-row {
+    gap: 10px;
+  }
+
+  /* Bigger player inputs */
+  .player-input {
+    font-size: 16px;
+    padding: 10px 14px;
+    border-radius: 10px;
+  }
+
+  .player-remove-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  /* Easier to tap add player */
+  .add-player-btn {
+    font-size: 15px;
+    padding: 6px 0;
+  }
+
+  /* Add team button */
+  .add-team-btn {
+    padding: 18px 18px;
+    font-size: 15px;
+    border-radius: 16px;
+  }
+
+  /* Footer button has breathing room above */
+  .setup-footer {
+    padding-top: 8px;
+  }
+}
+
 .setup-step {
   font-size: 11px;
   font-weight: 600;
