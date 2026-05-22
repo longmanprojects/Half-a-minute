@@ -62,7 +62,10 @@ function CardInner({ words, onFlip, timerActive, onStart, teamColor, faceColor, 
             style={{ background: teamColor || '#1A1F3A' }}
             onClick={onStart}
           >
-            ▶ START
+            <svg className="play-icon" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true">
+              <path d="M0 0 L10 6 L0 12 Z"/>
+            </svg>
+            START
           </button>
         </div>
       ) : (

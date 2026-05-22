@@ -148,7 +148,16 @@
   padding: 16px 44px;
   border-radius: 50px;
   letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   transition: opacity 0.15s, transform 0.15s;
+}
+
+.play-icon {
+  width: 12px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .start-btn:active {
