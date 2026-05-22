@@ -46,9 +46,41 @@ html, body {
     box-shadow: none;
   }
 
+  /* Hide desktop mockup decorations */
   .phone-shell::before,
   .phone-shell::after {
     display: none;
+  }
+
+  /* Home button: sit just below the real notch/Dynamic Island */
+  .home-button {
+    top: calc(env(safe-area-inset-top, 44px) + 8px);
+  }
+
+  /* Screens that reserve 108px for the fake Dynamic Island + home button */
+  .setup-screen,
+  .rules-screen,
+  .scores-screen,
+  .who-starts-screen,
+  .target-screen {
+    padding-top: calc(env(safe-area-inset-top, 44px) + 56px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+  }
+
+  /* Splash screen: no home button, just safe area padding */
+  .splash-screen {
+    padding-top: calc(env(safe-area-inset-top, 44px) + 32px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px);
+  }
+
+  /* Home screen bottom buttons above home indicator */
+  .home-screen {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px);
+  }
+
+  /* Timer strip: home button sits inside it at the top */
+  .timer-strip {
+    padding-top: calc(env(safe-area-inset-top, 44px) + 12px);
   }
 }
 
