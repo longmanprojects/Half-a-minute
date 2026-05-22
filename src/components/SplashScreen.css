@@ -1,0 +1,135 @@
+.splash-screen {
+  justify-content: space-between;
+  padding: 80px 32px 64px;
+  user-select: none;
+  background: var(--navy);
+  overflow: hidden;
+}
+
+/* ── Content ── */
+.splash-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.splash-eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--yellow);
+  animation: fade-up 0.5s ease forwards;
+}
+
+.splash-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  line-height: 1;
+}
+
+/* ── The counting number ── */
+.splash-30 {
+  font-family: var(--font-display);
+  font-size: 130px;
+  letter-spacing: -4px;
+  line-height: 0.9;
+  display: block;
+  transition: color 0.25s;
+}
+
+/* While counting: slightly dimmed */
+.splash-30.counting {
+  color: rgba(245, 224, 110, 0.55);
+}
+
+/* Landed on 30: full brightness + bounce + glow */
+.splash-30.landed {
+  color: var(--yellow);
+  animation:
+    land-bounce 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    glow-pulse 2.8s ease-in-out 0.6s infinite;
+}
+
+@keyframes land-bounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.08); }
+  65%  { transform: scale(0.97); }
+  100% { transform: scale(1); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 20px rgba(245,224,110,0.2); }
+  50%       { text-shadow: 0 0 55px rgba(245,224,110,0.6), 0 0 90px rgba(245,224,110,0.2); }
+}
+
+/* ── SECONDS and EDITION — hidden until showRest ── */
+.splash-seconds,
+.splash-edition {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.splash-seconds {
+  font-family: var(--font-display);
+  font-size: 52px;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+
+.splash-edition {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.12em;
+  margin-top: 8px;
+  transition-delay: 0.12s;
+}
+
+.splash-seconds.visible,
+.splash-edition.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Tap to Begin ── */
+.splash-tap {
+  width: 100%;
+  background: var(--yellow);
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  padding: 22px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s ease 0.25s, transform 0.45s ease 0.25s;
+}
+
+.splash-tap.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: tap-pulse 2s ease-in-out 0.7s infinite;
+}
+
+@keyframes tap-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245,224,110,0.5); }
+  50%       { box-shadow: 0 0 0 14px rgba(245,224,110,0); }
+}
+
+.splash-tap:active {
+  transform: scale(0.97);
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

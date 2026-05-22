@@ -1,0 +1,113 @@
+.gameplay-screen {
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── End turn button (during active play) ── */
+.end-turn-bar {
+  width: calc(100% - 28px);
+  margin: 0 14px 16px;
+  flex-shrink: 0;
+  background: var(--yellow);
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 17px;
+  padding: 18px;
+  border-radius: 16px;
+  letter-spacing: 0.06em;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.end-turn-bar:active {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+/* ── Post-round scoring panel ── */
+.scoring-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px 16px;
+  background: rgba(255,255,255,0.05);
+  animation: slide-down 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.scoring-question {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--white);
+  text-align: center;
+}
+
+.scoring-toggle {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.toggle-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  font-size: 28px;
+  font-family: var(--font-display);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.toggle-btn:active {
+  background: rgba(255,255,255,0.2);
+  transform: scale(0.92);
+}
+
+.scored-num {
+  font-family: var(--font-display);
+  font-size: 72px;
+  line-height: 1;
+  min-width: 72px;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.bank-btn {
+  width: 100%;
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 17px;
+  padding: 16px;
+  border-radius: 14px;
+  letter-spacing: 0.05em;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.bank-btn:active {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+/* Red edge vignette for critical phase */
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  box-shadow: inset 0 0 60px 20px rgba(229, 82, 59, 0.35);
+  animation: vignette-pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes vignette-pulse {
+  from { box-shadow: inset 0 0 60px 20px rgba(229,82,59,0.25); }
+  to   { box-shadow: inset 0 0 80px 30px rgba(229,82,59,0.5); }
+}

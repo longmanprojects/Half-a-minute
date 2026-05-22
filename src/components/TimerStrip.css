@@ -1,0 +1,74 @@
+.timer-strip {
+  background: rgba(255,255,255,0.06);
+  border-radius: 20px 20px 0 0;
+  padding: 52px 24px 20px; /* extra top for home button */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background 0.4s;
+  position: relative;
+}
+
+/* ── Amber phase: gentle pulse toward orange ── */
+.timer-strip.phase-amber {
+  animation: pulse-amber 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-amber {
+  from { background: rgba(251,140,0,0.10); }
+  to   { background: rgba(251,140,0,0.22); }
+}
+
+/* ── Critical phase: aggressive red pulse ── */
+.timer-strip.phase-critical {
+  animation: pulse-critical 0.45s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-critical {
+  from { background: rgba(229,82,59,0.18); }
+  to   { background: rgba(229,82,59,0.38); }
+}
+
+.timer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.round-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4);
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.team-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  /* color set inline via teamColor */
+}
+
+.player-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+}
+
+.timer-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer-digits {
+  font-family: var(--font-display);
+  line-height: 1;
+  letter-spacing: -2px;
+  transition: font-size 0.25s ease, color 0.4s;
+}

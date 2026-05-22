@@ -1,0 +1,101 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --navy: #1A1F3A;
+  --yellow: #F5E06E;
+  --blue: #7BB8D4;
+  --red: #E5523B;
+  --orange: #F09F3D;
+  --pink: #E879A6;
+  --white: #FFFFFF;
+  --offwhite: #FAF3DC;
+  --font-display: 'Archivo Black', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: #0d0d0d;
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* iPhone mockup shell */
+.phone-shell {
+  position: relative;
+  width: 393px;
+  height: 852px;
+  background: var(--navy);
+  border-radius: 54px;
+  box-shadow:
+    0 0 0 10px #1a1a1a,
+    0 0 0 12px #2e2e2e,
+    0 40px 80px rgba(0,0,0,0.7),
+    0 10px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dynamic Island */
+.phone-shell::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 126px;
+  height: 37px;
+  background: #0d0d0d;
+  border-radius: 20px;
+  z-index: 100;
+}
+
+/* Side buttons */
+.phone-shell::after {
+  content: '';
+  position: absolute;
+  right: -13px;
+  top: 160px;
+  width: 4px;
+  height: 80px;
+  background: #2e2e2e;
+  border-radius: 2px;
+  box-shadow: 0 -100px 0 #2e2e2e, 0 110px 0 #2e2e2e;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--navy);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+}
+
+input {
+  outline: none;
+  font-family: var(--font-body);
+}

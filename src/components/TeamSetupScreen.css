@@ -1,0 +1,229 @@
+.setup-screen {
+  padding: 108px 24px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.setup-step {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--yellow);
+  margin-bottom: 8px;
+}
+
+.setup-title {
+  font-family: var(--font-display);
+  font-size: 44px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.setup-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+}
+
+.setup-header {
+  flex-shrink: 0;
+}
+
+.team-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 0;
+}
+
+.team-card {
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.team-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+}
+
+.color-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.color-dot:active {
+  transform: scale(0.9);
+}
+
+.color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.color-swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.color-swatch.selected {
+  border-color: var(--white);
+  transform: scale(1.15);
+}
+
+.color-swatch:active {
+  transform: scale(0.9);
+}
+
+.team-name {
+  flex: 1;
+  background: none;
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--white);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-hint {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  font-family: var(--font-body);
+}
+
+.team-name-input {
+  flex: 1;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--white);
+}
+
+.remove-btn {
+  background: none;
+  color: rgba(255,255,255,0.3);
+  font-size: 16px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+
+.remove-btn:active {
+  color: var(--red);
+}
+
+.add-team-btn {
+  background: none;
+  border: 1.5px dashed rgba(255,255,255,0.2);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.05em;
+  text-align: left;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.add-team-btn:active {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+
+.setup-footer {
+  flex-shrink: 0;
+}
+
+/* ── Player section ── */
+.player-section {
+  padding: 4px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-input {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 13px;
+  color: var(--white);
+}
+
+.player-input::placeholder {
+  color: rgba(255,255,255,0.22);
+}
+
+.player-remove-btn {
+  background: none;
+  color: rgba(255,255,255,0.25);
+  font-size: 13px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.player-remove-btn:active {
+  color: var(--red);
+}
+
+.add-player-btn {
+  background: none;
+  color: rgba(255,255,255,0.35);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: left;
+  padding: 3px 0;
+  transition: color 0.15s;
+}
+
+.add-player-btn:active {
+  color: var(--yellow);
+}
+
+.player-max-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+  padding: 2px 0;
+}
