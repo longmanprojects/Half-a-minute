@@ -106,6 +106,7 @@ input {
   html, body, #root {
     height: 100svh; /* fallback for older iOS */
     height: 100dvh; /* dynamic: shrinks when browser bars hide */
+    background: var(--navy); /* prevent black body showing below viewport */
   }
 
   .phone-shell {
