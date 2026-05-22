@@ -52,7 +52,6 @@ export default function SplashScreen({ onBegin }) {
   return (
     <div className="screen splash-screen" onClick={showRest ? onBegin : undefined}>
       <div className="splash-content">
-        <p className="splash-eyebrow">MZANZI'S FAVOURITE GAME</p>
         <h1 className="splash-title">
           <span className={`splash-30 ${landed ? 'landed' : 'counting'}`}>
             {displayNum}
