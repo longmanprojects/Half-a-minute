@@ -6,8 +6,8 @@ export default function HomeScreen({ onHowToPlay, onStartGame }) {
       <div className="home-top">
         <div className="home-logo-mark">30</div>
         <div className="home-title-block">
-          <h1 className="home-title">30 Seconds</h1>
-          <p className="home-subtitle">Travel Edition</p>
+          <h1 className="home-title">SECONDS</h1>
+          <p className="home-subtitle">TRAVEL EDITION</p>
         </div>
         <p className="home-tagline">One card. Five clues. Thirty seconds.</p>
       </div>
