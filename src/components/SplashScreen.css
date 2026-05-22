@@ -39,11 +39,13 @@
   line-height: 0.9;
   display: block;
   transition: color 0.25s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* While counting: slightly dimmed */
+/* While counting: dimmed using solid colour (rgba causes GPU compositing blur on mobile) */
 .splash-30.counting {
-  color: rgba(245, 224, 110, 0.55);
+  color: #928957;
 }
 
 /* Landed on 30: full brightness + bounce + glow */
