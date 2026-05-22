@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { playClick } from './utils/sounds.js'
-import { cards, shuffleDeck } from './data/cards.js'
+import { shuffleDeck } from './data/cards.js'
 import SplashScreen from './components/SplashScreen.jsx'
 import HomeScreen from './components/HomeScreen.jsx'
 import RulesScreen from './components/RulesScreen.jsx'
@@ -94,7 +94,7 @@ function App() {
   }
 
   function startGame(configuredTarget) {
-    const shuffled = shuffleDeck(cards)
+    const shuffled = shuffleDeck()
     const indices = {}
     const turns = {}
     teams.forEach(t => { indices[t.id] = 0; turns[t.id] = 0 })
@@ -155,7 +155,7 @@ function App() {
     }
     const nextCardIdx = cardIdx + 1
     if (nextCardIdx >= deck.length) {
-      setDeck(shuffleDeck(cards))
+      setDeck(shuffleDeck())
       setCardIdx(0)
     } else {
       setCardIdx(nextCardIdx)
@@ -216,7 +216,7 @@ function App() {
       )}
       {screen === 'gameplay' && (
         <GameplayScreen
-          card={deck[cardIdx] || cards[0]}
+          card={deck[cardIdx] || { id: -1, front: [], back: [] }}
           team={teams[currentTeamIdx]}
           playerName={currentPlayerName}
           roundNumber={roundNumber}
