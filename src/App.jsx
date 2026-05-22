@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { playClick } from './utils/sounds.js'
 import { cards, shuffleDeck } from './data/cards.js'
 import SplashScreen from './components/SplashScreen.jsx'
 import HomeScreen from './components/HomeScreen.jsx'
@@ -42,7 +43,14 @@ const DEFAULT_TEAMS = [
 ]
 
 function App() {
-  const [screen, setScreen] = useState('splash') // splash | home | rules | setup | target | draw | gameplay | scores
+  const [screen, setScreen] = useState('splash')
+
+  // Global button click sound via event delegation
+  useEffect(() => {
+    const handler = (e) => { if (e.target.closest('button')) playClick() }
+    document.addEventListener('click', handler)
+    return () => document.removeEventListener('click', handler)
+  }, []) // splash | home | rules | setup | target | draw | gameplay | scores
   const [teams, setTeams] = useState(DEFAULT_TEAMS)
   const [targetScore, setTargetScore] = useState(30)
   const [deck, setDeck] = useState([])

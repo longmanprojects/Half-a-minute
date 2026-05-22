@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import TimerStrip from './TimerStrip.jsx'
 import CardComponent from './CardComponent.jsx'
 import './GameplayScreen.css'
+import { playTick, playTimeUp } from '../utils/sounds.js'
 
 const MAX_TIME = 31
 
@@ -51,9 +52,13 @@ export default function GameplayScreen({ card, team, playerName, roundNumber, on
       setTimeLeft(t => {
         if (t <= 1) {
           finishTurn()
+          playTimeUp()
           return 0
         }
-        return t - 1
+        const next = t - 1
+        const phase = next <= 5 ? 'critical' : next <= 10 ? 'amber' : 'calm'
+        playTick(phase)
+        return next
       })
     }, 1000)
   }
