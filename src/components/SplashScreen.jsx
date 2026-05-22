@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 import './SplashScreen.css'
 
 // Countdown schedule: [fromNumber, interval_ms]
-// Starts fast, slows as it approaches 30
+// Starts fast, slows as it approaches 31
 const SCHEDULE = buildSchedule()
 
 function buildSchedule() {
   const steps = []
-  for (let n = 1; n <= 30; n++) {
-    const dist = 30 - n
+  for (let n = 1; n <= 31; n++) {
+    const dist = 31 - n
     let interval
     if (dist > 20) interval = 18
     else if (dist > 10) interval = 25
@@ -32,8 +32,8 @@ export default function SplashScreen({ onBegin }) {
 
     function tick() {
       if (stepIdx >= SCHEDULE.length) {
-        // Landed on 30
-        setDisplayNum(30)
+        // Landed on 31
+        setDisplayNum(31)
         setLanded(true)
         setTimeout(() => setShowRest(true), 300)
         return

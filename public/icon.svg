@@ -3,7 +3,7 @@
   <!-- Background -->
   <rect width="512" height="512" rx="112" fill="#1A1F3A"/>
 
-  <!-- Yellow "30" -->
+  <!-- Yellow "31" -->
   <text
     x="256"
     y="295"
@@ -14,7 +14,7 @@
     font-size="272"
     letter-spacing="-12"
     fill="#F5E06E"
-  >30</text>
+  >31</text>
 
   <!-- Blue "SECONDS" -->
   <text

@@ -6,13 +6,13 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const publicDir = resolve(__dirname, '../public')
 
-// SVG icon: navy background, yellow "30" in Archivo Black style, blue "SECONDS" beneath
+// SVG icon: navy background, yellow "31" in Archivo Black style, blue "SECONDS" beneath
 const svg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <!-- Background -->
   <rect width="512" height="512" rx="112" fill="#1A1F3A"/>
 
-  <!-- Yellow "30" -->
+  <!-- Yellow "31" -->
   <text
     x="256"
     y="295"
@@ -23,7 +23,7 @@ const svg = `
     font-size="272"
     letter-spacing="-12"
     fill="#F5E06E"
-  >30</text>
+  >31</text>
 
   <!-- Blue "SECONDS" -->
   <text

@@ -4,12 +4,12 @@ export default function HomeScreen({ onHowToPlay, onStartGame }) {
   return (
     <div className="screen home-screen">
       <div className="home-top">
-        <div className="home-logo-mark">30</div>
+        <div className="home-logo-mark">31</div>
         <div className="home-title-block">
           <h1 className="home-title">SECONDS</h1>
           <p className="home-subtitle">TRAVEL EDITION</p>
         </div>
-        <p className="home-tagline">One card. Five clues. Thirty seconds.</p>
+        <p className="home-tagline">One card. Five clues. Thirty-one seconds.</p>
       </div>
 
       <div className="home-actions">

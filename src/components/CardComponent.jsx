@@ -41,7 +41,7 @@ function CardInner({ words, onFlip, timerActive, onStart, teamColor, faceColor, 
     <div className="card-inner" style={{ background: faceColor }}>
       <div className="card-brand-band">
         <div className="card-brand-block">
-          <span className="card-brand-name">30 SECONDS</span>
+          <span className="card-brand-name">31 SECONDS</span>
           <span className="card-brand-edition">TRAVEL EDITION</span>
         </div>
         <button

@@ -3,7 +3,7 @@ import TimerStrip from './TimerStrip.jsx'
 import CardComponent from './CardComponent.jsx'
 import './GameplayScreen.css'
 
-const MAX_TIME = 30
+const MAX_TIME = 31
 
 function getPhase(t, active) {
   if (!active) return 'calm'

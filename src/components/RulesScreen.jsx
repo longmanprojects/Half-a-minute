@@ -8,8 +8,8 @@ export default function RulesScreen({ onPlay, onHome }) {
 
       <div className="rules-header">
         <p className="rules-eyebrow">HOW TO PLAY</p>
-        <h1 className="rules-title">30 SECONDS</h1>
-        <p className="rules-tagline">One card. Five clues. Thirty seconds.<br />No skipping. No nonsense.</p>
+        <h1 className="rules-title">31 SECONDS</h1>
+        <p className="rules-tagline">One card. Five clues. Thirty-one seconds.<br />No skipping. No nonsense.</p>
       </div>
 
       <div className="rules-cards">
@@ -17,7 +17,7 @@ export default function RulesScreen({ onPlay, onHome }) {
           <span className="rule-number">01</span>
           <div className="rule-text">
             <h2>DESCRIBE IT</h2>
-            <p>One player from your team has 30 seconds to describe all 5 clues — without saying the word itself.</p>
+            <p>One player from your team has 31 seconds to describe all 5 clues — without saying the word itself.</p>
           </div>
         </div>
 
