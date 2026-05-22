@@ -33,58 +33,7 @@ html, body {
   align-items: center;
 }
 
-/* On real mobile devices: fill the actual viewport, no mockup shell */
-@media (max-width: 430px) {
-  html, body, #root {
-    height: 100dvh;
-  }
-
-  .phone-shell {
-    width: 100%;
-    height: 100dvh;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  /* Hide desktop mockup decorations */
-  .phone-shell::before,
-  .phone-shell::after {
-    display: none;
-  }
-
-  /* Home button: sit just below the real notch/Dynamic Island */
-  .home-button {
-    top: calc(env(safe-area-inset-top, 44px) + 8px);
-  }
-
-  /* Screens that reserve 108px for the fake Dynamic Island + home button */
-  .setup-screen,
-  .rules-screen,
-  .scores-screen,
-  .who-starts-screen,
-  .target-screen {
-    padding-top: calc(env(safe-area-inset-top, 44px) + 56px);
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
-  }
-
-  /* Splash screen: no home button, just safe area padding */
-  .splash-screen {
-    padding-top: calc(env(safe-area-inset-top, 44px) + 32px);
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px);
-  }
-
-  /* Home screen bottom buttons above home indicator */
-  .home-screen {
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px);
-  }
-
-  /* Timer strip: home button sits inside it at the top */
-  .timer-strip {
-    padding-top: calc(env(safe-area-inset-top, 44px) + 12px);
-  }
-}
-
-/* iPhone mockup shell */
+/* ── Desktop: iPhone mockup shell ── */
 .phone-shell {
   position: relative;
   width: 393px;
@@ -149,4 +98,58 @@ button {
 input {
   outline: none;
   font-family: var(--font-body);
+}
+
+/* ── Mobile: fill the real device viewport ── */
+/* Breakpoint 500px catches all iPhones including Pro Max (430px logical width) */
+@media (max-width: 500px) {
+  html, body, #root {
+    height: 100svh; /* fallback for older iOS */
+    height: 100dvh; /* dynamic: shrinks when browser bars hide */
+  }
+
+  .phone-shell {
+    width: 100%;
+    height: 100svh; /* fallback */
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Hide desktop mockup decorations */
+  .phone-shell::before,
+  .phone-shell::after {
+    display: none;
+  }
+
+  /* Home button: sit just below the real notch / Dynamic Island */
+  .home-button {
+    top: calc(env(safe-area-inset-top, 44px) + 8px);
+  }
+
+  /* Screens with 108px top padding (designed for fake Dynamic Island + home button) */
+  .setup-screen,
+  .rules-screen,
+  .scores-screen,
+  .who-starts-screen,
+  .target-screen {
+    padding-top: calc(env(safe-area-inset-top, 44px) + 56px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+  }
+
+  /* Splash screen has no home button */
+  .splash-screen {
+    padding-top: calc(env(safe-area-inset-top, 44px) + 32px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px);
+  }
+
+  /* Home screen: push bottom buttons above home indicator */
+  .home-screen {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px);
+  }
+
+  /* Timer strip: home button lives here at the top */
+  .timer-strip {
+    padding-top: calc(env(safe-area-inset-top, 44px) + 12px);
+  }
 }
