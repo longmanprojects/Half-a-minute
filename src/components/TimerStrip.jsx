@@ -7,7 +7,7 @@ const SAND_COLORS = {
   critical: '#E5523B',
 }
 
-export default function TimerStrip({ timeLeft, maxTime, teamName, teamColor, playerName, roundNumber, phase }) {
+export default function TimerStrip({ timeLeft, maxTime, teamName, teamColor, playerName, roundNumber, phase, isSuddenDeath, suddenDeathRound }) {
   const sandPct = timeLeft / maxTime
 
   // Digit size grows as critical seconds count down (5→0)
@@ -18,7 +18,12 @@ export default function TimerStrip({ timeLeft, maxTime, teamName, teamColor, pla
   return (
     <div className={`timer-strip phase-${phase}`}>
       <div className="timer-meta">
-        <span className="round-label">ROUND {roundNumber}</span>
+        {isSuddenDeath
+          ? <span className="round-label sd-round-chip">
+              ⚡ SUDDEN DEATH{suddenDeathRound > 1 ? ` R${suddenDeathRound}` : ''}
+            </span>
+          : <span className="round-label">ROUND {roundNumber}</span>
+        }
         <div className="team-info">
           <span className="team-label" style={{ color: teamColor }}>
             {teamName.toUpperCase()}'S TURN

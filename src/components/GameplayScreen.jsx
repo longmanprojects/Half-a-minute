@@ -13,7 +13,7 @@ function getPhase(t, active) {
   return 'calm'
 }
 
-export default function GameplayScreen({ card, team, playerName, roundNumber, onEndTurn, onHome }) {
+export default function GameplayScreen({ card, team, playerName, roundNumber, isSuddenDeath, suddenDeathRound, onEndTurn, onHome }) {
   const [timeLeft, setTimeLeft] = useState(MAX_TIME)
   const [timerActive, setTimerActive] = useState(false)
   const [scoring, setScoring] = useState(false)   // post-round scoring panel
@@ -78,6 +78,8 @@ export default function GameplayScreen({ card, team, playerName, roundNumber, on
         playerName={playerName}
         roundNumber={roundNumber}
         phase={phase}
+        isSuddenDeath={isSuddenDeath}
+        suddenDeathRound={suddenDeathRound}
       />
 
       {/* Post-round scoring panel */}

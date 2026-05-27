@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { playClick } from './utils/sounds.js'
 import { shuffleDeck } from './data/cards.js'
+import OfflineBanner from './components/OfflineBanner.jsx'
 import SplashScreen from './components/SplashScreen.jsx'
 import HomeScreen from './components/HomeScreen.jsx'
 import RulesScreen from './components/RulesScreen.jsx'
@@ -63,6 +64,10 @@ function App() {
   const [turnsPlayed, setTurnsPlayed] = useState({})
   const [pendingWin, setPendingWin] = useState(false)
   const [winTriggerTeam, setWinTriggerTeam] = useState(null)
+  const [isSuddenDeath, setIsSuddenDeath] = useState(false)
+  const [suddenDeathTeams, setSuddenDeathTeams] = useState([])
+  const [suddenDeathScores, setSuddenDeathScores] = useState({})
+  const [suddenDeathRound, setSuddenDeathRound] = useState(0)
 
   const currentTeam = teams[currentTeamIdx]
   const currentPlayerIdx = playerIndices[currentTeam?.id] ?? 0
@@ -73,6 +78,17 @@ function App() {
   const nextPlayerIdx = playerIndices[nextTeam?.id] ?? 0
   const nextPlayerName = nextTeam?.players?.[nextPlayerIdx]?.name ?? ''
 
+  // During sudden death, next team is the next in the SD rotation
+  let sdNextTeam = nextTeam
+  let sdNextPlayerName = nextPlayerName
+  if (isSuddenDeath && !winner && suddenDeathTeams.length > 0) {
+    const currentSDTeam = teams[currentTeamIdx]
+    const currentSDIdx = suddenDeathTeams.findIndex(t => t.id === currentSDTeam?.id)
+    const nextSDIdx = currentSDIdx === -1 ? 0 : (currentSDIdx + 1) % suddenDeathTeams.length
+    sdNextTeam = suddenDeathTeams[nextSDIdx]
+    sdNextPlayerName = sdNextTeam?.players?.[playerIndices[sdNextTeam?.id] ?? 0]?.name ?? ''
+  }
+
   function goHome() {
     setTeams(DEFAULT_TEAMS)
     setPlayerIndices({})
@@ -80,6 +96,10 @@ function App() {
     setPendingWin(false)
     setWinTriggerTeam(null)
     setTurnsPlayed({})
+    setIsSuddenDeath(false)
+    setSuddenDeathTeams([])
+    setSuddenDeathScores({})
+    setSuddenDeathRound(0)
     setScreen('home')
   }
 
@@ -118,6 +138,30 @@ function App() {
   function endTurn(points) {
     setLastTurnPoints(points)
 
+    if (isSuddenDeath) {
+      const sdTeam = teams[currentTeamIdx]
+      const newSDScores = { ...suddenDeathScores, [sdTeam.id]: points }
+      setSuddenDeathScores(newSDScores)
+
+      const allPlayed = suddenDeathTeams.every(t => t.id in newSDScores)
+      if (allPlayed) {
+        const maxSD = Math.max(...suddenDeathTeams.map(t => newSDScores[t.id] ?? 0))
+        const sdWinners = suddenDeathTeams.filter(t => (newSDScores[t.id] ?? 0) === maxSD)
+        if (sdWinners.length === 1) {
+          setWinner(sdWinners[0])
+          setIsSuddenDeath(false)
+        } else {
+          // Still tied — start another sudden death round with the remaining tied teams
+          setSuddenDeathTeams(sdWinners)
+          setSuddenDeathScores({})
+          setSuddenDeathRound(r => r + 1)
+        }
+      }
+
+      setScreen('scores')
+      return
+    }
+
     const scoringTeam = teams[currentTeamIdx]
     const newTeams = teams.map((t, i) =>
       i === currentTeamIdx ? { ...t, score: t.score + points } : t
@@ -133,8 +177,16 @@ function App() {
     const isGameEndCondition = (pendingWin || anyHitTarget) && allEqual
 
     if (isGameEndCondition) {
-      const best = newTeams.reduce((a, b) => b.score > a.score ? b : a)
-      setWinner(best)
+      const maxScore = Math.max(...newTeams.map(t => t.score))
+      const tiedTeams = newTeams.filter(t => t.score === maxScore)
+      if (tiedTeams.length > 1) {
+        setIsSuddenDeath(true)
+        setSuddenDeathTeams(tiedTeams)
+        setSuddenDeathScores({})
+        setSuddenDeathRound(1)
+      } else {
+        setWinner(newTeams.reduce((a, b) => b.score > a.score ? b : a))
+      }
       setPendingWin(false)
       setWinTriggerTeam(null)
     } else if (anyHitTarget && !pendingWin) {
@@ -146,6 +198,32 @@ function App() {
   }
 
   function nextTurn() {
+    if (isSuddenDeath) {
+      const currentSDTeam = teams[currentTeamIdx]
+      const currentSDIdx = suddenDeathTeams.findIndex(t => t.id === currentSDTeam?.id)
+      const nextSDIdx = currentSDIdx === -1 ? 0 : (currentSDIdx + 1) % suddenDeathTeams.length
+      const nextSDTeam = suddenDeathTeams[nextSDIdx]
+      const nextMainIdx = teams.findIndex(t => t.id === nextSDTeam.id)
+
+      // Advance player for the team that just played (skip on first SD entry where currentSDIdx is -1)
+      if (currentSDIdx !== -1 && currentSDTeam?.players?.length > 0) {
+        const advanced = ((playerIndices[currentSDTeam.id] ?? 0) + 1) % currentSDTeam.players.length
+        setPlayerIndices(p => ({ ...p, [currentSDTeam.id]: advanced }))
+      }
+
+      const nextCardIdx = cardIdx + 1
+      if (nextCardIdx >= deck.length) {
+        setDeck(shuffleDeck())
+        setCardIdx(0)
+      } else {
+        setCardIdx(nextCardIdx)
+      }
+
+      setCurrentTeamIdx(nextMainIdx)
+      setScreen('gameplay')
+      return
+    }
+
     const nextIdx = (currentTeamIdx + 1) % teams.length
     // Advance the player index for the team that just played
     const playingTeam = teams[currentTeamIdx]
@@ -171,11 +249,16 @@ function App() {
     setPendingWin(false)
     setWinTriggerTeam(null)
     setTurnsPlayed({})
+    setIsSuddenDeath(false)
+    setSuddenDeathTeams([])
+    setSuddenDeathScores({})
+    setSuddenDeathRound(0)
     setScreen('setup')
   }
 
   return (
     <>
+      <OfflineBanner />
       {screen === 'splash' && (
         <SplashScreen onBegin={() => setScreen('home')} />
       )}
@@ -220,6 +303,8 @@ function App() {
           team={teams[currentTeamIdx]}
           playerName={currentPlayerName}
           roundNumber={roundNumber}
+          isSuddenDeath={isSuddenDeath}
+          suddenDeathRound={suddenDeathRound}
           onEndTurn={endTurn}
           onHome={goHome}
         />
@@ -234,8 +319,12 @@ function App() {
           pendingWin={pendingWin}
           winTriggerTeam={winTriggerTeam}
           turnsPlayed={turnsPlayed}
-          nextTeam={nextTeam}
-          nextPlayerName={nextPlayerName}
+          nextTeam={isSuddenDeath ? sdNextTeam : nextTeam}
+          nextPlayerName={isSuddenDeath ? sdNextPlayerName : nextPlayerName}
+          isSuddenDeath={isSuddenDeath}
+          suddenDeathTeams={suddenDeathTeams}
+          suddenDeathScores={suddenDeathScores}
+          suddenDeathRound={suddenDeathRound}
           onNext={nextTurn}
           onReset={resetToSetup}
           onHome={goHome}
